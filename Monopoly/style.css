@@ -1,0 +1,1330 @@
+@font-face {
+    font-family: hebbo;
+    src: url(./font/static/Heebo-Regular.ttf);
+}
+:root{
+    --bord-color2:#fff;
+    --bord-color:#cef9db;
+}
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    direction: rtl;
+    font-family: hebbo;
+    overflow: hidden;
+
+}
+button:hover{
+    cursor: pointer;
+}
+.img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+main {
+    width: 90%;
+    margin: 2vh auto;
+    margin-bottom: 1vh;
+    box-shadow: 0 0 4px 0 #333;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 450px;
+    min-height: 600px;
+    position: relative;
+}
+
+#GameBord {
+    z-index: 2;
+    width: 660px;
+    min-width: 658px;
+    min-height: 658px;
+    height: 658px;
+    border: 2px solid #333;
+    position: relative;
+    background-color: #cef9db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    box-shadow: 0 0 5px 0 #000;
+    transform: scale(.9);
+}
+
+@media (min-width:460px) and (max-width:600px) {
+    #GameBord {
+        transform: scale(.65)
+    }
+
+    #PlayersInfo {
+        width: 100% !important;
+        height: 10% !important;
+        max-width: unset !important;
+        position: absolute;
+        top: 0;
+        right: 0;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: row !important;
+    }
+    #PlayersInfo  .singelPlayerInfoDiv {
+        width: 20%;
+        height: 100%;
+        margin:auto;
+        margin-left:3% ;
+    }
+    #CardsAndActions {
+        display: none !important;
+    }
+}
+
+@media (min-width:0px) and (max-width:459px) {
+    #GameBord {
+        transform: scale(.4);
+    }
+}
+
+
+.rowPlayGround {
+    width: 460px;
+    height: 100px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+
+#pg-bottom {
+    bottom: 0;
+}
+
+#pg-top {
+    flex-direction: row-reverse;
+    top: 0;
+}
+
+#pg-left {
+    transform: rotate(90deg);
+    left: -180px;
+}
+
+#pg-right {
+    transform: rotate(-90deg);
+    right: -180px;
+}
+
+.rowPlayGround .box_row {
+    height: 100%;
+    width: 13%;
+    max-width: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.box_base_points{
+    width: 100px;
+    height: 99px;
+    position: absolute;
+    background: #fff;
+}
+#sqPos-0{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-left: 1px solid #333;
+    box-sizing: border-box;
+}
+#sqPos-10{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#sqPos-20{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#sqPos-30{
+    border-left: 1px solid #333;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#pg-top .box_row {
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+}
+
+#pg-left .box_row,
+#pg-bottom .box_row,
+#pg-right .box_row {
+    box-sizing: border-box;
+    border-top: 1px solid #333;
+}
+
+
+#PlayersInfo {
+    width: 15%;
+    height: 50%;
+    max-width: 195px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 4px 0 #333;
+    
+}
+
+#CardsAndActions {
+    overflow: hidden;
+    width: 0%;
+    height: 55%;
+    max-width: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 4px 0 #333;
+}
+
+#sqPos-9,
+#sqPos-19,
+#sqPos-21,
+#sqPos-39 {
+    border-left: 1px solid #333;
+}
+
+.sqInfo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bord-color);
+    border-right: 1px solid #333;
+}
+.isPlayerTurn{
+    border: 6px #333;
+    border-style: double;
+    box-sizing: border-box;
+    background-color: #c4fff6;
+    box-shadow: 0 0 4px 0 #000;
+    transform: scale(1.02);
+}
+.isPlayerTurn::before {
+    content: "";
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    top: 0;
+    background-image: url(./img/MonopolyManPlay.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.sqInfo .city_name {
+    text-align: center;
+    font-size: .78rem;
+    position: absolute;
+    text-shadow: 0px 0px 1px #fff;
+    padding: 0;
+    top: 0;
+    width: 100%;
+    height: 20%;
+    margin: 0;
+    border-bottom: 1px solid #333;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.sqInfo .price {
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.55rem;
+    text-align: center;
+    font-weight: 800;
+
+}
+
+.card_name {
+    font-weight: 800;
+    margin: 0;
+    width: 100%;
+    font-size: 0.6rem;
+    text-align: center;
+    padding: 1px;
+    box-sizing: border-box;
+    margin: 0;
+    margin-block: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sq_Street .card_name {
+    position: absolute;
+    top: 19%;
+
+}
+
+.sq_Train .card_name , .sq_Compenys .card_name , .sq_Tax .card_name  {
+    position: absolute;
+    top: 0%;
+
+}
+
+
+.sq_luck .card_name,
+.sq_surprise .card_name {
+    position: absolute;
+    top: 5%;
+
+}
+
+.player_landin_erea {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    top: 25%;
+    z-index: 5;
+    gap: 10%;
+}
+
+.card_img {
+    width: 100%;
+    height: 35%;
+    position: absolute;
+    top: 30%;
+}
+
+.Train_img {
+    background-image: url(./img/train.png);
+}
+
+.electric-img {
+    background-image: url(./img/electric_company.png);
+}
+
+.water-img {
+    background-image: url(./img/water_company.png);
+}
+
+.surprise-img {
+    position: absolute;
+    top: 40%;
+    background-image: url(./img/surpriced.png);
+}
+
+.luck-img {
+    position: absolute;
+    top: 40%;
+    background-image: url(./img/locky_chest_logo.png);
+}
+
+.loxer-img {
+
+    background-image: url(./img/tax.png);
+}
+
+.dot-img::before {
+    content: ".";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    font-size: 3rem;
+    color: #333;
+}
+.Start-img{
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    bottom: 15%;
+    background-image: url(./img/start_arrow.png);
+}
+.Prison-img{
+    position: absolute;
+    top: 0 !important;
+    right: 0;
+    background-image: url(./img/prison.jpg);
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    background-repeat: repeat;
+    
+}
+#inPrisonId{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.GoToPrison-img{
+    background-image: url(./img/go_to_prison.png);
+    transform: rotateY(180deg);
+}
+.FreeParking-img{
+    background-image: url(./img/free_parkig.png);
+}
+.start-title{
+    position: absolute;
+    top: 10%;
+}
+.basePointImag{
+    min-width: 70px;
+    min-height: 70px;
+    position: absolute;
+    top: 7%;
+}
+.box_base_points .title{
+    margin-block: 0;
+    font-size: .81rem;
+    font-weight: 900;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.box_base_points .start-sub_title{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 35%;
+    margin-block: 0;
+    font-size: .65rem;
+    font-weight: 600;
+    position: absolute;
+    padding: 2px;
+    box-sizing: border-box;
+    
+}
+.GTP-and-FP-title{
+    position: absolute;
+    bottom: 5%;
+    margin: 0;
+    margin-block: 0;
+    font-size: .81rem;
+    font-weight: 900;
+}
+.Prison-title{
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    margin-block: 0;
+    font-size: .81rem;
+    font-weight: 900;
+    height: 28%;
+    display: flex;
+    justify-content: center;
+}
+.Prison-title-rotate {
+    transform: rotate(90deg);
+    left: -36%;
+    top: 35%;
+}
+.card_on_box.suprise_card{
+
+    background-size: 40px;
+    background-image: url(./img/white_surprice.png);
+    background-color: #fb9020;
+    left: 62%;
+    bottom: 26%;
+
+}
+.card_on_box.lucky_card{
+    position: absolute;
+    left: 20%;
+    top: 25%;
+    background-size: 50px;
+    background-image: url(./img/locky_chest_logo.png);
+    background-color: #67cdf8;
+}
+.card_on_box{
+
+    position: absolute;
+    width: 105px;
+    height: 60px;
+    transform: rotate(315deg);
+    box-shadow: 0 0 4px 0 #333;
+    border-radius: 3px;
+    border: 2px solid #fff;
+
+
+}
+/* ---- Players Style ---- */
+.singelPlayerInfoDiv{
+    width: 100%;
+    height: 20%;
+    margin: 2.5% auto;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.playerName{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    gap: 5%;
+    align-items: center;
+    flex-direction: row-reverse;
+    
+}
+.bc-Red{
+    background-color: red;
+}
+.bc-Blue{
+    background-color: blue;
+}
+.bc-Green{
+    background-color: green;
+}
+.bc-Yellow{
+    background-color: yellow;
+}
+.playerColor{
+    border: 1px solid #333;
+    margin-right: 20%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.PlayerAvatar {
+    width: 15px;
+    filter: drop-shadow(0px 0px 2px black);
+    height: 20px;
+}
+.player_landin_erea.visitingPrison{
+    top: 0;
+    height: 100%;
+}
+
+#player-Red {
+    background-image: url(./img/player_token-red.png);
+}
+
+#player-Blue {
+    background-image: url(./img/player_token-blue.png);
+}
+
+#player-Green {
+    background-image: url(./img/player_token-green.png);
+}
+
+#player-Yellow {
+    background-image: url(./img/player_token-yellow.png);
+}
+/* ------------- */
+#coverDiv{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #3e3e3e;
+    opacity: .7;
+    z-index: 3;
+}
+.buyContainerDiv{
+    width: 20%;
+    position: fixed;
+    left: 50%;
+    height: 70vh;
+    z-index: 10;
+    /* border: 2px solid #333; */
+    border-radius: 3px;
+    min-width: 260px;
+    transform: translateX(-50%);
+}
+.openCardOfLending {
+    background-color: #fff;
+    width: 95%;
+    border: 1px solid #333;
+    height: 70%;
+    max-width: 210px;
+    max-height: 400px;
+    margin: 5% auto;
+}
+
+.streetCardOpen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cityCardName {
+    width: 90%;
+    border: 1px solid #333;
+    margin: 2% auto;
+    height: 15%;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.morgtage_and_price_container_div {
+    width: 90%;
+    height: 7%;
+    margin: 2px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.title_price_and_morgtage {
+    font-size: .9rem;
+    font-weight: 700;
+    color: #333;
+    padding: 0;
+}
+
+.price_and_morgtage {
+    font-size: .8rem;
+    font-weight: 500;
+    color: #333;
+    padding: 0;
+}
+
+.line_between {
+    width: 90%;
+    margin: 5px auto;
+    border-top: 1px solid #333;
+}
+
+.title_basic_rent_p {
+    font-size: .8rem;
+    font-weight: 700;
+    color: #333;
+    padding: 0;
+}
+
+.basic_rent_p {
+    font-size: .72rem;
+    font-weight: 700;
+    color: #333;
+    padding: 0;
+    width: 20%;
+}
+
+.container_house_and_hotel {
+    width: 90%;
+    height: 5%;
+    margin: 3px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.house_img {
+    width: 20px;
+    height: 20px;
+    background-image: url(./img/house_monopoly.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .7rem;
+}
+.hotel_img {
+    width: 20px;
+    height: 20px;
+    background-image: url(./img/hotel_monopoly\(1\).png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .7rem;
+}
+.nameOfCard{
+    width: 90%;
+    border: 1px solid #333;
+    margin: 2% auto;
+    height: 15%;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.card-open-img{
+    width: 90%;
+    height: 30%;
+    margin: auto;
+}
+.num_of_Places{
+    font-size: .7rem;
+}
+.containerBtns{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.gameInfoOncard{
+    display: flex;
+    font-size: .7rem;
+    text-align: center;
+    width: 95%;
+    font-weight: 700;
+}
+.btnsOnOpenCard{
+    width: 40%;
+    min-width: 50px;
+    min-height: 30px;
+    border-radius: 5px;
+    background-color: red;
+    outline: 1px solid #fff;
+    outline-offset: -5px;
+    color: #fff;
+    font-size: .9rem;
+    max-width: 100px;
+}
+.openCardPayTax{
+    width: 100%;
+    height: 30%;
+    position: relative;
+    border-radius: 5px;
+    border: 2px solid #333;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.sadMonoplyMen-img{
+background-image: url(./img/sadMonoplyMan.png);
+}
+.openCardPayTax .sadMonoplyMen-img{
+    width: 42%;
+    height: 100%;
+    position: absolute;
+    right: -20%;
+    bottom: -1%;
+}
+.payTaxCardName{
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid #333;
+    box-sizing: border-box;
+    width: 52%;
+    height: 30%;
+    margin-top: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.payTaxinfo{
+    font-size: .9rem;
+    font-weight: 600;
+    margin-top: 15%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dice_rolling_animation {
+    animation: rolling-dice infinite 3s linear;
+}
+
+.dice_rolling_animation2 {
+    animation: rolling-dice2 infinite 3s linear;
+}
+.dices {
+    width: 50px;
+    height: 50px;
+}
+.dice-1 {
+    background-image: url(./img/dices-1.png);
+}
+
+.dice-2 {
+    background-image: url(./img/dices-2.png);
+}
+
+.dice-3 {
+    background-image: url(./img/dices-3.png);
+}
+
+.dice-4 {
+    background-image: url(./img/dices-4.png);
+}
+
+.dice-5 {
+    background-image: url(./img/dices-5.png);
+}
+
+.dice-6 {
+    background-image: url(./img/dices-6.png);
+}
+@keyframes rolling-dice {
+    0% {
+        transform: rotateZ(0deg);
+        background-image: url(./img/dices-2.png);
+    }
+
+    30% {
+        background-image: url(./img/dices-6.png);
+    }
+
+    50% {
+        background-image: url(./img/dices-1.png);
+    }
+
+    70% {
+        background-image: url(./img/dices-5.png);
+    }
+
+    100% {
+        transform: rotateZ(1000deg);
+
+        background-image: url(./img/dices-2.png);
+    }
+}
+
+@keyframes rolling-dice2 {
+    0% {
+        background-image: url(./img/dices-4.png);
+    }
+
+    30% {
+
+        background-image: url(./img/dices-2.png);
+    }
+
+
+    50% {
+        display: block;
+        background-image: url(./img/dices-6.png);
+    }
+
+    60% {
+        display: none;
+    }
+
+    70% {
+        background-image: url(./img/dices-1.png);
+    }
+
+    100% {
+        transform: rotateZ(1000deg);
+        background-image: url(./img/dices-3.png);
+    }
+}
+/* --------- */
+#DicesContainer{
+    width: 30%;
+    min-width: 100px;
+    min-height: 75px;
+    background-color: #fff;
+    outline: 2px solid red;
+    outline-offset: -8px;
+    border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 15%;
+    border-radius: 50px;
+    position: relative;
+}
+.btnThrowDice{
+    position: absolute;
+    bottom: -60%;
+    width: 40%;
+    min-width: 107px;
+    min-height: 36px;
+    border-radius: 5px;
+    background-color: red;
+    outline: 1px solid #fff;
+    outline-offset: -5px;
+    color: #fff;
+    font-size: 1rem;
+    max-width: 100px;
+}
+.propFlag{
+    position: absolute;
+    bottom: -7%;
+    height: 5px;
+    width: 70%;
+    left: 15%;
+    border-radius: 0 0 50% 50%;
+    border: 1px solid;
+}
+.btns{
+    min-height: 36px;
+    border-radius: 5px;
+    background-color: red;
+    outline: 1px solid #fff;
+    outline-offset: -5px;
+    color: #fff;
+    /* border: 1px solid #fff; */
+    width: 92%;
+    margin: 2% auto;
+    position: absolute;
+    bottom: 0;
+    left: 4%;
+    font-size: .9rem;
+}
+.openCardLuckyChest{
+    width: 100%;
+    height: 30%;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 4px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    text-align: center;
+    animation: open-card-lucky 1 2s 0s linear forwards ;
+}
+@keyframes open-card-lucky {
+    0% {
+        background-size: 110px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #67cdf8;
+        border: 4px solid #fff;
+        background-image: url(./img/locky_chest_logo.png);
+    }
+    95%{
+        background-size: 110px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #67cdf8;
+        border: 4px solid #fff;
+        background-image: url(./img/locky_chest_logo.png);
+    }
+    
+    100% {
+     
+        border: 4px solid #333;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #fff;
+        background-image: none;
+    }
+}
+.luckyCardName{
+    width: 75%;
+    height: 30%;
+    margin: 2% auto;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.luckyCardText{
+    visibility: hidden;
+    font-size: .85rem;
+    margin-top: 7%;
+}
+.luckyCardText , .luckyCardName{
+    animation: hide-text-lucky .2s 1 2s ease-in-out forwards ;
+
+}
+@keyframes hide-text-lucky {
+    0% {
+        transform: scale(.01);
+        visibility: hidden;
+        display: none;
+    }
+    
+    100% {
+        transform: scale(1);
+        visibility: visible;
+        display: flex;
+    }
+}
+.monopolyMenPopUp , .btnGetAndPay{
+    visibility: hidden;
+    animation: monopolyMen-PopUp .2s 1 2s ease-in-out forwards ;
+}
+@keyframes monopolyMen-PopUp {
+    0% {
+        transform: scale(.01);
+        visibility: hidden;
+
+    }
+    
+    100% {
+        transform: scale(1);
+        visibility: visible;
+
+    }
+}
+.payToMonopolyMan-img{
+    background-image: url(./img/MrMonopolyPayMejpg.png);
+    min-width: 100px;
+    min-height: 150px;
+    position: absolute;
+    right: -35%;
+}
+.btnGetAndPay{
+    position: absolute;
+    bottom: 50%;
+
+}
+.getPriceFromMonopolyMan-img{
+    min-width: 100px;
+    min-height: 150px;
+    position: absolute;
+    right: -35%;
+    background-image: url(./img/mrMonopolyHappy.png);
+
+}
+.monopolyManImg{
+    width: 100px;
+    height: 150px;
+    position: absolute;
+}
+.monopoloyManGoStart-img{
+    width: 115px;
+    height: 138px;
+    position: absolute;
+    right: -30%;
+    background-image: url(./img/monoplyManStartRuning.png);
+    transform: translate(6%,-30%);
+    
+}
+.getMoneyFromStartPoint{
+    position: fixed;
+    z-index: 100;
+    width: 15%;
+    height: 5vh;
+    min-width: 250px;
+    min-height: 50px;
+    background-color: #fff;
+    display: flex;
+    top: 25%;
+    left: 50%;
+    border: 3px solid red;
+    transform: translate(-50%, -50%);
+
+
+    visibility: hidden;
+    animation: start-PopUp 3s 1 0s ease-in-out forwards ;
+
+}
+.startGothrowText{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: red;
+}
+@keyframes start-PopUp {
+    0% {
+        transform: scale(.01) translate(-50%, -50%);
+        visibility: hidden;
+
+    }
+    
+    25% {
+        transform: scale(1) translate(-50%, -50%);
+        visibility: visible;
+
+    }
+    50% {
+        transform: scale(1) translate(-50%, -50%);
+        visibility: visible;
+
+    }
+    75% {
+        transform: scale(1) translate(-50%, -50%);
+        visibility: visible;
+
+    }
+    100% {
+        transform: scale(.01) translate(-50%, -50%);
+        visibility: hidden;
+
+    }
+}
+.youNeedToPayToContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    height: 15%;
+    font-size: 1.2em;
+    font-weight: 700;
+    box-shadow: 0 0 9px 0 #000;
+    border-radius: 45px;
+}
+.youNeedToPayTo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+
+}
+.markThis{
+    box-shadow: 0 0 4px 0 #333;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #daeeff;
+    box-sizing: border-box;
+}
+.dubelDiv{
+    position: fixed;
+    width: 200px;
+    box-shadow: 0 0 4px 0 #000;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2%;
+    border: 5px solid red;
+    border-radius: 29px;
+    outline: 4px solid #57a5c8;
+    height: 90px;
+    animation: start-PopUp 3s 1 0s ease-in-out forwards ;
+}
+.dubelDiv span{
+    font-size: 2rem;
+    font-weight: 800;
+    color: red;
+    text-shadow: 0 1px 0px #378ab4, 2px 2px 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 2px 2px 2px rgba(255,255,255,0);
+    
+}
+.dubelDiv p{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.addHousesBtn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 8% auto;
+    position: relative;
+    border: 5px solid red;
+    background-color: red;
+    background-image: url(./img/add_house\(1\).png);
+}
+.addHousesBtn .popupFromBtn{
+    white-space: nowrap;
+    width: 0px;
+    overflow: hidden;
+    font-size: .9rem;
+    border-radius: 20px 0 0 20px;
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    left: 0%;
+    height: 74%;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addHousesBtn::before{
+    content: "+";
+    color: #ffffff;
+    position: absolute;
+    top: -50%;
+    right: -17%;
+    display: block;
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 800;
+}
+.containerHousesBtn:hover .addHousesBtn{
+    animation: moveBtn .3s 1 0s ease-in-out forwards ;
+    box-shadow: 0 0 3px 0 #000;
+    
+}
+.containerHousesBtn:hover {
+    cursor: pointer;
+}
+.containerHousesBtn{
+    width: 100%;
+    height: 11%;
+    margin: 15% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerHousesBtn:hover .popupFromBtn{
+    animation: popUpFromBtn .3s 1 .3s linear forwards ;
+    
+}
+.btnAddAnewHouse{
+    min-height: 36px;
+    border-radius: 5px;
+    background-color: red;
+    outline: 1px solid #fff;
+    outline-offset: -5px;
+    color: #fff;
+    width: 60%;
+    margin: 2% auto;
+    position: absolute;
+    bottom: 15%;
+    left: 20%;
+    font-size: .9rem;
+}
+.housesContainer{
+    width: 100%;
+    position: absolute;
+    top: -15%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    align-items: center;
+    justify-content: center;
+}
+.houseDivOnBord{
+    width: 19%;
+    height: 70%;
+background-image: url(./img/houseOnBord.png);
+}
+@keyframes popUpFromBtn {
+    0% {
+        width: 2px;
+        transform: translate(0%,-50%);
+        position: absolute;
+        left: -60%;
+        
+    }
+    
+    100% {
+        position: absolute;
+        left: -98%;
+        width: 80px;
+        box-shadow:-2px 0px 2px -1px #686868;
+        transform: translate(-55%,-50%);
+    }
+}
+@keyframes moveBtn {
+    0% {
+        transform: translate(0%, 0%)
+    }
+    
+    100% {
+        transform: translate(85%, 0%)
+      
+
+    }
+}
+.popupGoToPrison{
+    position: fixed;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 175px;
+    height: 103px;
+    z-index: 100;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.3rem;
+    border: 5px solid;
+    border-radius: 10px;
+}
+.goToPrisonPopUp-img{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    right: -50%;
+    background-image: url(./img/monopolyManInPrison.png);
+}
+.doAnimationGoToPrison{
+    animation: popUpGoToPrison 6s 1 0s linear forwards ;
+
+}
+@keyframes popUpGoToPrison {
+    0% {
+        transform: translate(-50%, -50%) scale(.1);
+        border-color: blue;
+    }
+    10%{
+        transform: translate(-50%, -50%) scale(1);
+        border-color: red;
+    }
+    
+    20%{
+        border-color: blue;
+        
+    }
+    30%{
+        
+        border-color: red;
+    }
+    40%{
+        border-color: blue;
+        
+    }
+    50%{
+        border-color: red;
+        
+    }
+    60%{
+        border-color: blue;
+        
+    }
+    70%{
+        border-color: red;
+        
+    }
+    80%{
+        
+        border-color: blue;
+    }
+    90%{
+        border-color: red;
+        
+    }
+    100% {
+        border-color: blue;
+        transform: translate(-50%, -50%) scale(1);
+
+    }
+}
